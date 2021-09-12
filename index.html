@@ -8,9 +8,27 @@
     <title>Quiz Game</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <p id="high-score">View High Score</p>
+        <p>Time Remaining:<span id="time">--</span></p>
+    </header>
 
-    <section></section>
+    <section class="game-box">
+        <div class="start-display">
+            <h1 class="question">Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by Ten seconds!</p>
+            <button id="button">Start Quiz</button>
+        </div>
+
+        <div class="game-display">
+            <h2 class="question">Commonly used data types DO NOT include:</h2>
+            <button id="button">1. Strings</button>
+            <button id="button">2. Boolean</button>
+            <button id="button">3. Alerts</button>
+            <button id="button">4. Numbers</button> 
+        </div>
+    </section>
+
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
