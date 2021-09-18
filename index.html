@@ -13,21 +13,35 @@
         <p>Time Remaining:<span id="time">--</span></p>
     </header>
 
-    <section class="game-box">
-        <div class="start-display">
+    <div id="container" class="game-box">
+        <!--Start home page-->
+        <div id="start-display">
             <h1 class="question">Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by Ten seconds!</p>
-            <button id="button">Start Quiz</button>
+            <div id="start" class="btn">Start Quiz</div>
         </div>
-
-        <div class="game-display">
-            <h2 class="question">Commonly used data types DO NOT include:</h2>
-            <button id="button">1. Strings</button>
-            <button id="button">2. Boolean</button>
-            <button id="button">3. Alerts</button>
-            <button id="button">4. Numbers</button> 
+        <!-- Question box-->
+        <div id="quiz">
+            <div class="game-display" id="question-display" style="display: none">
+                <!--All the question elements-->
+                <h2 class="question" id="questions"></h2>
+                <div id="answers">
+                    <div id="one" class="btn" onclick="checkAnswer('one')"></div>
+                    <div id="two" class="btn" onclick="checkAnswer('two')"></div>
+                    <div id="three" class="btn" onclick="checkAnswer('three')"></div>
+                    <div id="four" class="btn" onclick="checkAnswer('four')"></div>
+                </div> 
+            </div>
         </div>
-    </section>
+        <!--If user times out of quiz this shows a score of 0 and tells them the game is over-->
+        <div id="time-out" style="display:none">
+            <h3>Times up, You scored 0 points!</h3>
+            <div id="game-over" class="btn">Game Over!</div>
+        </div>
+        <div class="answer-box">
+            <p id="answer-display" class="answer-look" style="display: none"></p>
+        </div>
+    </div>
 
     <script src="./assets/js/script.js"></script>
 </body>
