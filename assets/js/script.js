@@ -1,3 +1,4 @@
+// defining of variables
 var timerEl = document.getElementById('time');
 var startbtn = document.getElementById('start');
 var quiz = document.getElementById('quiz');
@@ -11,10 +12,15 @@ var gameDisplay = document.getElementById('question-display');
 var displayAnswer = document.getElementById('answer-display');
 var timeOut= document.getElementById('time-out');
 var gameOver = document.getElementById('game-over');
+var scoreEntry = document.getElementById('score-entry')
+var highscoreDisplay = document.getElementById('highscore-box')
+var showHighscores = document.getElementById('high-score')
 
 var timeLeft;
 var showAnswer = 1;
 
+var numberHighscore = 0;
+var entries = [];
 // questions for quiz
 var questions = [
     {
@@ -130,10 +136,14 @@ function checkAnswer(answer){
     //stop timer
     else{
         clearInterval(timeInterval);
+        gameDisplay.style.display="none";
+        scoreEntry.style.display="block";
+        displayScore.innerHTML = 'Your final score is ' + timeLeft +'.';
         console.log('end of quiz');
     }
 }
 
+// overall time variable
 var timeInterval;
 //timer 
 function timer() {
@@ -159,11 +169,100 @@ timeInterval = setInterval(function() {
 function homeScreen(){
     startDisplay.style.display = "flex";
     timeOut.style.display = "none";
+    scoreEntry.style.display="none";
+    highscoreDisplay.style.display="none"
 }
+
+
+// display scoreboard when clicked
+function highscoreBoard(){
+    //set displays
+    timeOut.style.display='none';
+    gameDisplay.style.display='none';
+    startDisplay.style.display='none';
+    highscoreDisplay.style.display='block';
+    timeLeft = '--';
+
+    //return item from localstorage
+    var savedScore = localStorage.getItem('entries');
+    if(!savedScore){
+        return false
+    }
+    console.log("saved scores found!")
+    savedScore = JSON.parse(savedScore);
+    var ul = document.getElementById('highScores');
+
+    for(i=0;i < savedScore.length; i++){
+        var scores = savedScore[i];
+        var li = document.createElement('li')
+        li.className = 'scores';
+        li.id = numberHighscore + ' delete';
+        li.appendChild(document.createTextNode(scores));
+        ul.appendChild(li);
+
+        numberHighscore++;
+    }
+
+    console.log(savedScore);
+}
+
+
+
+
+var submit = document.getElementById('submit-Score')
+var userInitials = document.getElementById('user-input');
+var displayScore = document.getElementById('display-score')
+
+
+
+
+// sets user input and the logs it to localstorage
+function userName() {
+    var test = document.getElementById("initials").value;
+
+    if (!test){
+        alert("you need to enter something")
+        return false;
+    }
+    var highScore = test + " - " + timeLeft;
+
+    
+    entries.push(highScore);
+    
+    saveScores();
+
+    
+
+    console.log(highScore);
+
+    //localStorage.setItem('highScore', highScore);
+    homeScreen();
+   
+}
+
+var saveScores = function() {
+    localStorage.setItem('entries', JSON.stringify(entries));
+}
+
+//when clicked clears localstorage
+function clearStorage(){
+    localStorage.clear();
+    highscoreBoard();
+    removeScores();
+    
+}
+
+function removeScores(scores) {
+    var listParent = document.getElementById('highscores');
+    var scores = document.getElementById('delete');
+    listParent.removeChild(scores);
+}
+
 
 // starting the quiz
 function startGame() {
     timeLeft = 70;
+    listQuestions = 0;
     startDisplay.style.display = "none";
     showQuestion();
     gameDisplay.style.display = "block";
@@ -171,5 +270,5 @@ function startGame() {
     
 
 }
-
+showHighscores.addEventListener("click", highscoreBoard);
 startbtn.addEventListener("click", startGame);

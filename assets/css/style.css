@@ -61,3 +61,24 @@ header {
     padding-top: 3%;
     font-style: italic;
 }
+
+.input-bar {
+    display: flex;
+}
+
+.bar {
+    display: flex;
+}
+
+.space {
+    margin-left: 5px;
+}
+
+.highscores {
+    padding: 0;
+}
+
+.scores {
+    background-color: rgb(199, 174, 199);
+    list-style-type: none;
+}

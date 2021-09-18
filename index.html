@@ -33,11 +33,41 @@
                 </div> 
             </div>
         </div>
+
         <!--If user times out of quiz this shows a score of 0 and tells them the game is over-->
         <div id="time-out" style="display:none">
             <h3>Times up, You scored 0 points!</h3>
             <div id="game-over" class="btn">Game Over!</div>
         </div>
+    
+        <!-- User input for score-->
+        <div id="score-entry" class="scoreboard-container" style="display: none">
+            <div id="score">
+                <h2>All done!</h2>
+                <p id='display-score'>Your Final Score</p>
+            </div>
+            <div class="input-bar">
+                <form id='user-input' class="bar">
+                        <input id="initials" type="text" name="user-score" placeholder="Enter your initials." />
+                        <input id='submit-score' class='btn space' type="button" value ="Submit!" name="button" onclick="userName()"/>
+                </form>
+            </div>
+        </div>
+
+        <!--Check scores-->
+        <div id="highscore-box" style="display: none">
+            <h2>Highscores</h2>
+            <ul id="highScores" class="highscores">
+                <!--<li id="scores" class="scores"></li>-->
+            </ul>
+            <div id="highscore-buttons">
+                <button id="go-back" class="btn" onclick="homeScreen()">Go back</button>
+                <button id="clearStorage" class="btn" onclick="clearStorage()">Clear Highscores</button>
+            </div>
+        </div>
+
+
+        <!--Display box for correct or wrong answer-->
         <div class="answer-box">
             <p id="answer-display" class="answer-look" style="display: none"></p>
         </div>
