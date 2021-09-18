@@ -1,4 +1,5 @@
 // defining of variables
+var header = document.getElementById('header');
 var timerEl = document.getElementById('time');
 var startbtn = document.getElementById('start');
 var quiz = document.getElementById('quiz');
@@ -126,7 +127,7 @@ function checkAnswer(answer){
                 showAnswer = 1;
             }
         }, 500)
-        timeLeft = timeLeft - 5;
+        timeLeft = timeLeft - 10;
     }
     //move on to the next question aslong as we arent currently on the last question
     if(listQuestions < lastQuestion){
@@ -170,18 +171,22 @@ function homeScreen(){
     startDisplay.style.display = "flex";
     timeOut.style.display = "none";
     scoreEntry.style.display="none";
-    highscoreDisplay.style.display="none"
+    highscoreDisplay.style.display="none";
+    header.style.display = 'flex';
+    timeLeft = '--';
 }
 
 
 // display scoreboard when clicked
 function highscoreBoard(){
     //set displays
+    header.style.display = 'none';
+    scoreEntry.style.display='none';
     timeOut.style.display='none';
     gameDisplay.style.display='none';
     startDisplay.style.display='none';
     highscoreDisplay.style.display='block';
-    timeLeft = '--';
+    
 
     //return item from localstorage
     var savedScore = localStorage.getItem('entries');
@@ -196,11 +201,10 @@ function highscoreBoard(){
         var scores = savedScore[i];
         var li = document.createElement('li')
         li.className = 'scores';
-        li.id = numberHighscore + ' delete';
+        li.id = 'delete';
         li.appendChild(document.createTextNode(scores));
         ul.appendChild(li);
 
-        numberHighscore++;
     }
 
     console.log(savedScore);
@@ -225,13 +229,13 @@ function userName() {
         return false;
     }
     var highScore = test + " - " + timeLeft;
-
+    highScore.id = numberHighscore;
     
     entries.push(highScore);
     
     saveScores();
 
-    
+    numberHighscore++;
 
     console.log(highScore);
 
@@ -249,13 +253,12 @@ function clearStorage(){
     localStorage.clear();
     highscoreBoard();
     removeScores();
-    
+    entries = [];    
 }
 
 function removeScores(scores) {
-    var listParent = document.getElementById('highscores');
     var scores = document.getElementById('delete');
-    listParent.removeChild(scores);
+    scores.remove();
 }
 
 
